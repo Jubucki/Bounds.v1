@@ -24,6 +24,27 @@ public class Map_library : MonoBehaviour
     {
         public List<PlatformData> platforms = new List<PlatformData>();
     }
+
+    public PlatformData MirrorPlatform(PlatformData original, Vector2 center)
+    {
+        PlatformData mirrored = original;
+        mirrored.position = (2f * center) - original.position;
+        return mirrored;
+    }
+
+    public GeneratedMap BuildSymmetricMap(List<PlatformData> halfMap, Vector 2 center)
+    {
+        GeneratedMap fullMap = new GeneratedMap();
+
+        foreach (PlatformData platform in halfMap)
+        {
+            fullMap.platforms.Add(platform);
+            fullMap.platforms.Add(MirrorPlatform(platform,center));
+
+        }
+
+        return fullMap;
+    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
